@@ -1,4 +1,5 @@
-import MainScreen from '../../pages/main-screen.tsx';
+import MainScreen from '../../pages/main-screen/main-screen';
+
 
 type AppScreenProps = {
   placeCount: number;
