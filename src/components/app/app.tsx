@@ -6,19 +6,24 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen.tsx';
 import OfferScreen from '../../pages/offer-screen/offer-screen.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import {AppRoute, AuthorizationStatus } from '../constants/constants.ts';
+import { Offer } from '../../types/offer.ts';
+//import { Review } from '../../types/review.ts';
 
 
 type AppScreenProps = {
   placeCount: number;
+  offers: Offer[];
+  //reviews: Review[];
 }
 
-function App({placeCount}: AppScreenProps): JSX.Element {
+function App({placeCount, offers}: AppScreenProps): JSX.Element {
+  const favorites = offers.filter((o) => o.isFavorite);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen placeCount={placeCount}/>}
+          element={<MainScreen placeCount={placeCount} offers={offers}/>}
         />
         <Route
           path={AppRoute.Login}
@@ -28,9 +33,9 @@ function App({placeCount}: AppScreenProps): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.Auth} //поменять потом обратно
             >
-              <FavoritesScreen/>
+              <FavoritesScreen favorites={favorites}/>
             </PrivateRoute>
           }
         />
