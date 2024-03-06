@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 
 type CityCardProps = {
@@ -14,13 +14,18 @@ function CityCard({cityCardInfo}: CityCardProps): JSX.Element {
     //city,
     //location,
     isFavorite,
-    //isPremium,
+    isPremium,
     rating,
     previewImage,
   } = cityCardInfo;
 
   return (
     <article className="cities__card place-card">
+      {isPremium && (
+        <div className="place-card__mark">
+          <span>Premium</span>
+        </div>
+      )}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
