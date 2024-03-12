@@ -1,6 +1,7 @@
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import ListOfCityCards from '../../components/list-of-city-cards/list-of-city-cards.tsx';
-import { Offer } from '../../types/offer.ts';
+import {Offer} from '../../types/offer.ts';
+import Map from '../../components/map/map.tsx';
 
 
 type MainScreenProps = {
@@ -15,7 +16,7 @@ function MainScreen({placeCount, offers}: MainScreenProps): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Link to='/' className="header__logo-link header__logo-link--active">
+              <Link to="/" className="header__logo-link header__logo-link--active">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
               </Link>
             </div>
@@ -100,10 +101,12 @@ function MainScreen({placeCount, offers}: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <ListOfCityCards cities={offers} />
+              <ListOfCityCards cities={offers}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={offers[0].city} points={offers}/>
+              </section>
             </div>
           </div>
         </div>
