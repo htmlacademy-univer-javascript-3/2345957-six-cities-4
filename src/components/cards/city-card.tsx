@@ -19,7 +19,6 @@ function CityCard({cityCardInfo, cityCardType}: CityCardProps): JSX.Element {
     rating,
     previewImage,
   } = cityCardInfo;
-  
   return (
     <Link to={`/offer/${id}`} state={cityCardInfo}>
       <article className={`${cityCardType === 'typical' ? 'cities__card place-card' : 'near-places__card place-card'}`} onClick={() => window.scrollTo(0, 0)}>
