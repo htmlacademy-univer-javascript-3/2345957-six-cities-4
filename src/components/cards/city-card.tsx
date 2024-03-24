@@ -3,9 +3,10 @@ import {Offer} from '../../types/offer';
 
 type CityCardProps = {
   cityCardInfo: Offer;
+  cityCardType: 'typical' | 'near';
 };
 
-function CityCard({cityCardInfo}: CityCardProps): JSX.Element {
+function CityCard({cityCardInfo, cityCardType}: CityCardProps): JSX.Element {
   const {
     id,
     title,
@@ -20,7 +21,7 @@ function CityCard({cityCardInfo}: CityCardProps): JSX.Element {
   } = cityCardInfo;
 
   return (
-    <article className="cities__card place-card">
+    <article className={`${cityCardType === 'typical' ? 'cities__card place-card' : 'near-places__card place-card'}`}>
       {isPremium && (
         <div className="place-card__mark">
           <span>Premium</span>
