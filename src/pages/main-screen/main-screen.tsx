@@ -7,9 +7,10 @@ import Map from '../../components/map/map.tsx';
 type MainScreenProps = {
   placeCount: number;
   offers: Offer[];
+  favorites: Offer[];
 }
 
-function MainScreen({placeCount, offers}: MainScreenProps): JSX.Element {
+function MainScreen({placeCount, offers, favorites}: MainScreenProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -23,14 +24,14 @@ function MainScreen({placeCount, offers}: MainScreenProps): JSX.Element {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <div className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <Link to="/favorites">
-                      <span className="header__favorite-count">3</span>
+                      <span className="header__favorite-count">{favorites.length}</span>
                     </Link>
-                  </a>
+                  </div>
                 </li>
                 <li className="header__nav-item">
                   <a className="header__nav-link" href="#">
@@ -101,7 +102,7 @@ function MainScreen({placeCount, offers}: MainScreenProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <ListOfCityCards cities={offers}/>
+              <ListOfCityCards cities={offers} listType={'typical'}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">

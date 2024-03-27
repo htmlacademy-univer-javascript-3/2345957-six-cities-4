@@ -5,25 +5,25 @@ import FavoritesScreen from '../../pages/favorites-screen/favorites-screen.tsx';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen.tsx';
 import OfferScreen from '../../pages/offer-screen/offer-screen.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
-import {AppRoute, AuthorizationStatus } from '../constants/constants.ts';
-import { Offer } from '../../types/offer.ts';
-//import { Review } from '../../types/review.ts';
+import {AppRoute, AuthorizationStatus} from '../constants/constants.ts';
+import {Offer} from '../../types/offer.ts';
+import {Review} from '../../types/review.ts';
 
 
 type AppScreenProps = {
   placeCount: number;
   offers: Offer[];
-  //reviews: Review[];
+  reviews: Review[];
 }
 
-function App({placeCount, offers}: AppScreenProps): JSX.Element {
+function App({placeCount, offers, reviews}: AppScreenProps): JSX.Element {
   const favorites = offers.filter((o) => o.isFavorite);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen placeCount={placeCount} offers={offers}/>}
+          element={<MainScreen placeCount={placeCount} offers={offers} favorites={favorites}/>}
         />
         <Route
           path={AppRoute.Login}
@@ -41,7 +41,7 @@ function App({placeCount, offers}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferScreen/>}
+          element={<OfferScreen reviews={reviews} favorites={favorites}/>}
         />
         <Route
           path="*"
