@@ -8,22 +8,26 @@ import PrivateRoute from '../private-route/private-route.tsx';
 import {AppRoute, AuthorizationStatus} from '../constants/constants.ts';
 import {Offer} from '../../types/offer.ts';
 import {Review} from '../../types/review.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks/index.ts';
+import {listFilling} from '../../store/action.ts';
 
 
 type AppScreenProps = {
-  placeCount: number;
-  offers: Offer[];
   reviews: Review[];
 }
 
-function App({placeCount, offers, reviews}: AppScreenProps): JSX.Element {
+function App({reviews}: AppScreenProps): JSX.Element {
+  const offers: Offer[] = useAppSelector((state) => state.offers);
+  const dispatch = useAppDispatch();
+  dispatch(listFilling());
+
   const favorites = offers.filter((o) => o.isFavorite);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen placeCount={placeCount} offers={offers} favorites={favorites}/>}
+          element={<MainScreen favorites={favorites}/>}
         />
         <Route
           path={AppRoute.Login}

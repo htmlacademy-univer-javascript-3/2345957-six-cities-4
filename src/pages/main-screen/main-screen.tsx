@@ -2,15 +2,27 @@ import {Link} from 'react-router-dom';
 import ListOfCityCards from '../../components/list-of-city-cards/list-of-city-cards.tsx';
 import {Offer} from '../../types/offer.ts';
 import Map from '../../components/map/map.tsx';
+import {useAppSelector} from '../../hooks/index.ts';
+import {useEffect, useState} from 'react';
+import CitiesList from '../../components/list-of-cities/list-of-cities.tsx';
+import {Cities} from '../../components/constants/constants.ts';
 
 
 type MainScreenProps = {
-  placeCount: number;
-  offers: Offer[];
   favorites: Offer[];
 }
 
-function MainScreen({placeCount, offers, favorites}: MainScreenProps): JSX.Element {
+function MainScreen({favorites}: MainScreenProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+
+  const [curCityOffers, setCurCityOffers] = useState<Offer[]>(offers);
+
+
+  const city = useAppSelector((state) => state.city);
+  useEffect(() => {
+    const filteredOffers = offers.filter((offer) => offer.city.name === city);
+    setCurCityOffers(filteredOffers);
+  }, [city, offers]);
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -27,8 +39,8 @@ function MainScreen({placeCount, offers, favorites}: MainScreenProps): JSX.Eleme
                   <div className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <Link to="/favorites">
+                      <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                       <span className="header__favorite-count">{favorites.length}</span>
                     </Link>
                   </div>
@@ -48,45 +60,14 @@ function MainScreen({placeCount, offers, favorites}: MainScreenProps): JSX.Eleme
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <CitiesList cities={Cities}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">${placeCount} places to stay in Amsterdam</b>
+              <b className="places__found">{`${curCityOffers.length} places to stay in ${city}`}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -102,11 +83,11 @@ function MainScreen({placeCount, offers, favorites}: MainScreenProps): JSX.Eleme
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <ListOfCityCards cities={offers} listType={'typical'}/>
+              <ListOfCityCards cities={curCityOffers} listType={'typical'}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={offers[0].city} points={offers}/>
+                <Map city={curCityOffers.length > 0 ? curCityOffers[0].city : offers[0].city} points={curCityOffers}/>
               </section>
             </div>
           </div>

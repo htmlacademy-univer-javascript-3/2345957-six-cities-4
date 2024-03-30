@@ -1,7 +1,3 @@
-export const Setting = {
-  placeCount: 312
-};
-
 export enum AppRoute {
   Main = '/',
   Login = '/login',
@@ -30,3 +26,31 @@ export const REVIEW_SIZE = '54';
 export const BOOKMARK_ICON_WIDTH = '18';
 
 export const BOOKMARK_ICON_HEIGHT = '19';
+
+export const Cities = [
+  {
+    name: 'Paris',
+    id: 1,
+  },
+  {
+    name: 'Cologne',
+    id: 2,
+  },
+  {
+    name: 'Brussels',
+    id: 3,
+  },
+  {
+    name: 'Amsterdam',
+    id: 4,
+  },
+  {
+    name: 'Hamburg',
+    id: 5,
+  },
+  {
+    name: 'Dusseldorf',
+    id: 6,
+  },
+];
+
