@@ -46,7 +46,7 @@ export const offers: Offer[] = [
     },
     'isFavorite': true,
     'isPremium': false,
-    'rating': 5,
+    'rating': 4,
     'previewImage': 'https://planetofhotels.com/guide/sites/default/files/styles/paragraph__live_banner__lb_image__1880bp/public/live_banner/Busan-1.jpg'
   },
 
@@ -71,7 +71,7 @@ export const offers: Offer[] = [
     },
     'isFavorite': false,
     'isPremium': true,
-    'rating': 4,
+    'rating': 5,
     'previewImage': 'https://planetofhotels.com/guide/sites/default/files/styles/node__blog_post__bp_banner/public/2021-09/tokyo.jpg'
   },
 
