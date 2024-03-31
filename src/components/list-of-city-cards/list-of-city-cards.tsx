@@ -1,4 +1,3 @@
-//import { useState } from 'react';
 import {useAppSelector} from '../../hooks';
 import {Offer} from '../../types/offer';
 import CityCard from '../cards/city-card';
@@ -11,7 +10,7 @@ type ListOfCityCardsProps = {
 
 function ListOfCityCards({cities, listType}: ListOfCityCardsProps) {
   const selectedSortType = useAppSelector((state) => state.sortType);
-  //const [activeCard, setActiveCard] = useState({id: 0});
+
   return (
     <div
       className={`${listType === 'typical' ? 'cities__places-list places__list tabs__content' : 'near-places__list places__list'}`}

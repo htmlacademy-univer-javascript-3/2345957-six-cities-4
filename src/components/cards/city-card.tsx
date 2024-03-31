@@ -2,6 +2,8 @@ import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {BOOKMARK_ICON_HEIGHT, BOOKMARK_ICON_WIDTH, CITY_CARD_HEIGHT, CITY_CARD_WIDTH} from '../constants/constants.ts';
 import {getRating} from '../../utils.ts';
+import {useAppDispatch} from '../../hooks/index.ts';
+import {highlightMarker} from '../../store/action.ts';
 
 type CityCardProps = {
   cityCardInfo: Offer;
@@ -21,9 +23,12 @@ function CityCard({cityCardInfo, cityCardType}: CityCardProps): JSX.Element {
     rating,
     previewImage,
   } = cityCardInfo;
+  const dispatch = useAppDispatch();
   return (
     <Link to={`/offer/${id}`} state={cityCardInfo}>
       <article className={`${cityCardType === 'typical' ? 'cities__card place-card' : 'near-places__card place-card'}`}
+        onMouseOver={() => dispatch(highlightMarker({id}))}
+        onMouseLeave={() => dispatch(highlightMarker(null))}
         onClick={() => window.scrollTo(0, 0)}
       >
         {isPremium && (

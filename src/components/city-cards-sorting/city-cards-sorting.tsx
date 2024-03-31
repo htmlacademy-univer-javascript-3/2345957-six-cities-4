@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sortTypeSelect} from '../../store/action.ts';
-import {SORT_TYPES} from '../constants/constants.ts';
+import {SORT_TYPES, SORTING_HEIGHT, SORTING_WIDTH} from '../constants/constants.ts';
 
 function CityCardsSorting() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,7 +15,7 @@ function CityCardsSorting() {
       <span className="places__sorting-caption">Sort by</span>
       <span className="places__sorting-type" tabIndex={0}>
         {selectedSortType}
-        <svg className="places__sorting-arrow" width="7" height="4">
+        <svg className="places__sorting-arrow" width={SORTING_WIDTH} height={SORTING_HEIGHT}>
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
