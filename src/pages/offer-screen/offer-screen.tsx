@@ -5,6 +5,7 @@ import ListOfReviews from '../../components/list-of-reviews/list-of-reviews.tsx'
 import Map from '../../components/map/map.tsx';
 import ListOfCityCards from '../../components/list-of-city-cards/list-of-city-cards.tsx';
 import {Offer} from '../../types/offer.ts';
+import {offers} from '../../mocks/offers.ts';
 
 type OfferScreenProps = {
   reviews: Review[];
