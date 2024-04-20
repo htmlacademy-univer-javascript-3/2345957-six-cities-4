@@ -2,10 +2,10 @@ import {Link} from 'react-router-dom';
 import CommentSubmissionForm from '../../components/comment-submission-form/comment-submission-form.tsx';
 import {Review} from '../../types/review.ts';
 import ListOfReviews from '../../components/list-of-reviews/list-of-reviews.tsx';
-import {offers} from '../../mocks/offers.ts';
 import Map from '../../components/map/map.tsx';
 import ListOfCityCards from '../../components/list-of-city-cards/list-of-city-cards.tsx';
 import {Offer} from '../../types/offer.ts';
+import {offers} from '../../mocks/offers.ts';
 
 type OfferScreenProps = {
   reviews: Review[];

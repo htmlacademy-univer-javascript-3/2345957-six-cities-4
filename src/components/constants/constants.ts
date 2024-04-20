@@ -11,11 +11,17 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export const URL_MARKER_DEFAULT =
-  'public/img/pin.svg';
+  '/img/pin.svg';
 
 export const URL_MARKER_CURRENT =
-  'public/img/pin-active.svg';
+  '/img/pin-active.svg';
 
 export const CITY_CARD_WIDTH = '260';
 
@@ -63,4 +69,6 @@ export const SORT_TYPES = {
   2: 'Price: high to low',
   3: 'Top rated first',
 };
+
+export const TIMEOUT_SHOW_ERROR = 2000;
 

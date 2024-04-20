@@ -8,8 +8,8 @@ import PrivateRoute from '../private-route/private-route.tsx';
 import {AppRoute, AuthorizationStatus} from '../constants/constants.ts';
 import {Offer} from '../../types/offer.ts';
 import {Review} from '../../types/review.ts';
-import {useAppDispatch, useAppSelector} from '../../hooks/index.ts';
-import {listFilling} from '../../store/action.ts';
+import {useAppSelector} from '../../hooks/index.ts';
+import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
 
 
 type AppScreenProps = {
@@ -18,8 +18,14 @@ type AppScreenProps = {
 
 function App({reviews}: AppScreenProps): JSX.Element {
   const offers: Offer[] = useAppSelector((state) => state.offers);
-  const dispatch = useAppDispatch();
-  dispatch(listFilling());
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+
+  if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
+    return (
+      <LoadingScreen/>
+    );
+  }
 
   const favorites = offers.filter((o) => o.isFavorite);
   return (
@@ -37,7 +43,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.Auth} //поменять потом обратно
+              authorizationStatus={authorizationStatus}
             >
               <FavoritesScreen favorites={favorites}/>
             </PrivateRoute>
