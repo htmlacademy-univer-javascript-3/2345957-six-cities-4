@@ -9,6 +9,11 @@ export type City = {
   location: Location;
 }
 
+export type Points = {
+  id: string;
+  location: Location;
+}
+
 export type Offer = {
   id: string;
   title: string;
@@ -21,3 +26,19 @@ export type Offer = {
   rating: number;
   previewImage: string;
 }
+
+type Host = {
+  name: string;
+  avatarUrl: string;
+  isPro: boolean;
+}
+
+export type ExtendedOffer = Omit<Offer, 'previewImage'> & {
+  description: string;
+  bedrooms: number;
+  goods: string[];
+  host: Host;
+  maxAdults: number;
+  images: string[];
+}
+
