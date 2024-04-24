@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import MainScreen from '../../pages/main-screen/main-screen.tsx';
 import LoginScreen from '../../pages/login-screen/login-screen.tsx';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen.tsx';
@@ -10,6 +10,8 @@ import {Offer} from '../../types/offer.ts';
 import {Review} from '../../types/review.ts';
 import {useAppSelector} from '../../hooks/index.ts';
 import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
+import browserHistory from '../../browser-history.ts';
+import HistoryRouter from '../history-router/history-router.tsx';
 
 
 type AppScreenProps = {
@@ -29,7 +31,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
 
   const favorites = offers.filter((o) => o.isFavorite);
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -58,7 +60,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
           element={<NotFoundScreen/>}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

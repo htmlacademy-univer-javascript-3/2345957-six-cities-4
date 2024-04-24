@@ -1,6 +1,6 @@
-import {FormEvent, useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import { useAppDispatch } from '../../hooks';
-import {Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { loginAction } from '../../store/api-actions';
 
 function LoginScreen(): JSX.Element {
@@ -8,7 +8,6 @@ function LoginScreen(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -21,7 +20,6 @@ function LoginScreen(): JSX.Element {
         })
       );
     }
-    navigate('/');
   };
   return (
     <div className="page page--gray page--login">
