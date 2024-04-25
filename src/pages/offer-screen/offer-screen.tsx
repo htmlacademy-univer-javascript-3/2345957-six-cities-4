@@ -9,6 +9,7 @@ import {useAppDispatch, useAppSelector } from '../../hooks/index.ts';
 import { useEffect } from 'react';
 import { fetchOfferDataAction } from '../../store/api-actions.ts';
 import {getRating} from '../../utils.ts';
+import { AuthorizationStatus } from '../../components/constants/constants.ts';
 
 type OfferScreenProps = {
   favorites: Offer[];
@@ -16,6 +17,8 @@ type OfferScreenProps = {
 
 function OfferScreen({favorites}: OfferScreenProps): JSX.Element {
   const { id } = useParams();
+
+  const user = useAppSelector((state) => state.authorizationStatus);
 
   const { offerInfo, nearestOffers, reviews } = useAppSelector(
     ({ currentOffer }) => ({
@@ -146,7 +149,7 @@ function OfferScreen({favorites}: OfferScreenProps): JSX.Element {
                   Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ListOfReviews reviews={reviews}/>
-                <CommentSubmissionForm/>
+                {user === AuthorizationStatus.Auth && <CommentSubmissionForm id={id!} />}
               </section>
             </div>
           </div>

@@ -7,7 +7,7 @@ import {
   loadOffers,
   setError,
   requireAuthorization,
-  setOffersDataLoadingStatus, loadOfferData, saveUserEmail
+  setOffersDataLoadingStatus, loadOfferData, saveUserEmail, sendReview
 } from './action';
 import {AuthorizationStatus} from '../components/constants/constants';
 import { Review } from '../types/review';
@@ -75,6 +75,9 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOfferData, (state, { payload }) => {
       state.selectedMarker = { id: payload.offerInfo.id };
       state.currentOffer = { ...payload };
+    })
+    .addCase(sendReview, (state, { payload }) => {
+      state.currentOffer.reviews = [...state.currentOffer.reviews, payload];
     });
 });
 

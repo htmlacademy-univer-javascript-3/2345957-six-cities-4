@@ -2,6 +2,7 @@ import {createAction} from '@reduxjs/toolkit';
 import { Offer } from '../types/offer';
 import {AppRoute, AuthorizationStatus } from '../components/constants/constants';
 import { OfferData } from '../types/offer-data';
+import { Review } from '../types/review';
 
 
 export const cityChange = createAction<string>('сityChange');
@@ -23,3 +24,5 @@ export const saveUserEmail = createAction<string>('user/saveEmail');
 export const redirectToRoute = createAction<AppRoute>('redirectToRoute');
 
 export const loadOfferData = createAction<OfferData>('loadOfferData');
+
+export const sendReview = createAction<Review>('sendReview');

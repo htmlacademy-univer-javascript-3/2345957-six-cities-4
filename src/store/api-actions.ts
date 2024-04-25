@@ -7,7 +7,7 @@ import {
   loadOffers,
   redirectToRoute,
   requireAuthorization,
-  saveUserEmail,
+  saveUserEmail, sendReview,
   setError,
   setOffersDataLoadingStatus
 } from './action.ts';
@@ -17,6 +17,7 @@ import {dropToken, saveToken } from '../services/token.ts';
 import { UserData } from '../types/user-data.ts';
 import { AuthData } from '../types/auth-data.ts';
 import { Review } from '../types/review.ts';
+import { CommentFormData } from '../types/comment-form-data.ts';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -54,6 +55,29 @@ export const fetchOfferDataAction = createAsyncThunk<
     `${APIRoute.Comments}/${id}`
   );
   dispatch(loadOfferData({ offerInfo, nearestOffers, reviews }));
+});
+
+
+export const sendCommentAction = createAsyncThunk<
+  void,
+  {
+    comment: CommentFormData;
+    id: string;
+  },
+  {
+    dispatch: AppDispatch;
+    state: State;
+    extra: AxiosInstance;
+  }
+>('sendComment', async ({ comment, id }, { dispatch, extra: api }) => {
+  const { data: review } = await api.post<Review>(
+    `${APIRoute.Comments}/${id}`,
+    {
+      comment: comment.comment,
+      rating: comment.rating,
+    }
+  );
+  dispatch(sendReview(review));
 });
 
 
