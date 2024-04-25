@@ -15,6 +15,8 @@ type OfferScreenProps = {
   favorites: Offer[];
 }
 
+const AVATAR_SIZE = '74';
+
 function OfferScreen({favorites}: OfferScreenProps): JSX.Element {
   const { id } = useParams();
 
@@ -128,8 +130,8 @@ function OfferScreen({favorites}: OfferScreenProps): JSX.Element {
                     <img
                       className="offer__avatar user__avatar"
                       src={offerInfo.host.avatarUrl}
-                      width="74"
-                      height="74"
+                      width={AVATAR_SIZE}
+                      height={AVATAR_SIZE}
                       alt="Host avatar"
                     />
                   </div>

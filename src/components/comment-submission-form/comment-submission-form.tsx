@@ -11,6 +11,10 @@ type Rating = {
   comment: string;
 }
 
+const STAR_WIDTH = '37';
+
+const STAR_HEIGHT = '33';
+
 function CommentSubmissionForm({ id }: CommentFromProps) {
   const [formState, setFormState] = useState<Rating>({
     rating: '',
@@ -32,7 +36,7 @@ function CommentSubmissionForm({ id }: CommentFromProps) {
     }));
   };
   const isValid = () =>
-    formState.comment.trim().length > 49 && formState.comment.trim().length < 300 && formState.rating !== '';
+    formState.comment.trim().length > 49 && formState.comment.trim().length < 301 && formState.rating !== '';
 
   const handleFromSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -73,7 +77,7 @@ function CommentSubmissionForm({ id }: CommentFromProps) {
           className="reviews__rating-label form__rating-label"
           title="perfect"
         >
-          <svg className="form__star-image" width="37" height="33">
+          <svg className="form__star-image" width={STAR_WIDTH} height={STAR_HEIGHT}>
             <use xlinkHref="#icon-star"></use>
           </svg>
         </label>
@@ -92,7 +96,7 @@ function CommentSubmissionForm({ id }: CommentFromProps) {
           className="reviews__rating-label form__rating-label"
           title="good"
         >
-          <svg className="form__star-image" width="37" height="33">
+          <svg className="form__star-image" width={STAR_WIDTH} height={STAR_HEIGHT}>
             <use xlinkHref="#icon-star"></use>
           </svg>
         </label>
@@ -111,7 +115,7 @@ function CommentSubmissionForm({ id }: CommentFromProps) {
           className="reviews__rating-label form__rating-label"
           title="not bad"
         >
-          <svg className="form__star-image" width="37" height="33">
+          <svg className="form__star-image" width={STAR_WIDTH} height={STAR_HEIGHT}>
             <use xlinkHref="#icon-star"></use>
           </svg>
         </label>
@@ -130,7 +134,7 @@ function CommentSubmissionForm({ id }: CommentFromProps) {
           className="reviews__rating-label form__rating-label"
           title="badly"
         >
-          <svg className="form__star-image" width="37" height="33">
+          <svg className="form__star-image" width={STAR_WIDTH} height={STAR_HEIGHT}>
             <use xlinkHref="#icon-star"></use>
           </svg>
         </label>
@@ -149,7 +153,7 @@ function CommentSubmissionForm({ id }: CommentFromProps) {
           className="reviews__rating-label form__rating-label"
           title="terribly"
         >
-          <svg className="form__star-image" width="37" height="33">
+          <svg className="form__star-image" width={STAR_WIDTH} height={STAR_HEIGHT}>
             <use xlinkHref="#icon-star"></use>
           </svg>
         </label>

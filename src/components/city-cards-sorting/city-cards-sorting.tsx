@@ -1,7 +1,10 @@
 import {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sortTypeSelect} from '../../store/action.ts';
-import {SORT_TYPES, SORTING_HEIGHT, SORTING_WIDTH} from '../constants/constants.ts';
+import {SORT_TYPES} from '../constants/constants.ts';
+
+const SORTING_WIDTH = '7';
+const SORTING_HEIGHT = '4';
 
 function CityCardsSorting() {
   const [isOpen, setIsOpen] = useState(false);

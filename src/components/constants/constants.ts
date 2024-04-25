@@ -24,19 +24,6 @@ export const URL_MARKER_DEFAULT =
 export const URL_MARKER_CURRENT =
   '/img/pin-active.svg';
 
-export const CITY_CARD_WIDTH = '260';
-
-export const CITY_CARD_HEIGHT = '200';
-
-export const REVIEW_SIZE = '54';
-
-export const BOOKMARK_ICON_WIDTH = '18';
-
-export const BOOKMARK_ICON_HEIGHT = '19';
-
-export const SORTING_WIDTH = '7';
-
-export const SORTING_HEIGHT = '4';
 export const Cities = [
   {
     name: 'Paris',
