@@ -43,7 +43,9 @@ function MainScreen({favorites}: MainScreenProps): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={curCityOffers.length > 0 ? curCityOffers[0].city : offers[0].city} points={curCityOffers}/>
+                <Map city={curCityOffers.length > 0 ? curCityOffers[0].city : offers[0].city} points={curCityOffers}
+                  specialCaseId={undefined}
+                />
               </section>
             </div>
           </div>

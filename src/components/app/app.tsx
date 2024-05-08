@@ -7,18 +7,13 @@ import OfferScreen from '../../pages/offer-screen/offer-screen.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import {AppRoute, AuthorizationStatus} from '../constants/constants.ts';
 import {Offer} from '../../types/offer.ts';
-import {Review} from '../../types/review.ts';
 import {useAppSelector} from '../../hooks/index.ts';
 import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
 import browserHistory from '../../browser-history.ts';
 import HistoryRouter from '../history-router/history-router.tsx';
 
 
-type AppScreenProps = {
-  reviews: Review[];
-}
-
-function App({reviews}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   const offers: Offer[] = useAppSelector((state) => state.offers);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
@@ -53,7 +48,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Offer}
-          element={<OfferScreen reviews={reviews} favorites={favorites}/>}
+          element={<OfferScreen favorites={favorites}/>}
         />
         <Route
           path="*"

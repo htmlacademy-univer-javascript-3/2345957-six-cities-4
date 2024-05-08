@@ -3,6 +3,9 @@ import { useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
 import { loginAction } from '../../store/api-actions';
 
+const LOGO_WIDTH = '81';
+const LOGO_HEIGHT = '41';
+
 function LoginScreen(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -32,8 +35,8 @@ function LoginScreen(): JSX.Element {
                   className="header__logo"
                   src="img/logo.svg"
                   alt="6 cities logo"
-                  width="81"
-                  height="41"
+                  width={LOGO_WIDTH}
+                  height={LOGO_HEIGHT}
                 />
               </a>
             </div>
