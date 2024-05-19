@@ -35,7 +35,7 @@ function Map({city, points, specialCaseId}: MapProps): JSX.Element {
 
   useEffect(() => {
     if (map && city) {
-      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+      map.flyTo([city.location.latitude, city.location.longitude], city.location.zoom);
     }
   }, [city, map]);
 
@@ -66,12 +66,6 @@ function Map({city, points, specialCaseId}: MapProps): JSX.Element {
       };
     }
   }, [map, points, selectedMarker, specialCaseId]);
-
-  useEffect(() => {
-    if (map && city) {
-      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
-    }
-  }, [map, city]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 }

@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { fetchOfferDataAction } from '../../store/api-actions.ts';
 import {getRating} from '../../utils.ts';
 import { AuthorizationStatus } from '../../components/constants/constants.ts';
+import {selectCurrentOfferData} from '../../store/selectors.ts';
 
 type OfferScreenProps = {
   favorites: Offer[];
@@ -21,14 +22,7 @@ function OfferScreen({favorites}: OfferScreenProps): JSX.Element {
   const { id } = useParams();
 
   const user = useAppSelector((state) => state.authorizationStatus);
-
-  const { offerInfo, nearestOffers, reviews } = useAppSelector(
-    ({ currentOffer }) => ({
-      offerInfo: currentOffer.offerInfo,
-      nearestOffers: currentOffer.nearestOffers,
-      reviews: currentOffer.reviews,
-    })
-  );
+  const { offerInfo, nearestOffers, reviews } = useAppSelector(selectCurrentOfferData);
 
   const points: Points[] = nearestOffers.map((offer) => ({
     id: offer.id,

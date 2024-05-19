@@ -2,6 +2,7 @@ import {useAppSelector} from '../../hooks';
 import {Offer} from '../../types/offer';
 import CityCard from '../cards/city-card';
 import {getSorting} from '../../utils.ts';
+import {memo} from 'react';
 
 type ListOfCityCardsProps = {
   cities: Offer[];
@@ -22,4 +23,6 @@ function ListOfCityCards({cities, listType}: ListOfCityCardsProps) {
   );
 }
 
-export default ListOfCityCards;
+const ListOfCityCardsMemo = memo(ListOfCityCards);
+
+export default ListOfCityCardsMemo;
