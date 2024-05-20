@@ -3,6 +3,7 @@ import {Offer} from '../../types/offer';
 import CityCard from '../cards/city-card';
 import {getSorting} from '../../utils.ts';
 import {memo} from 'react';
+import {getSortType} from '../../store/other-process/selectors.ts';
 
 type ListOfCityCardsProps = {
   cities: Offer[];
@@ -10,7 +11,7 @@ type ListOfCityCardsProps = {
 };
 
 function ListOfCityCards({cities, listType}: ListOfCityCardsProps) {
-  const selectedSortType = useAppSelector((state) => state.sortType);
+  const selectedSortType = useAppSelector(getSortType);
 
   return (
     <div

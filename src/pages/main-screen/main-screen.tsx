@@ -7,6 +7,8 @@ import CitiesList from '../../components/list-of-cities/list-of-cities.tsx';
 import {Cities} from '../../components/constants/constants.ts';
 import CityCardsSorting from '../../components/city-cards-sorting/city-cards-sorting.tsx';
 import Hat from '../../components/hat/hat.tsx';
+import {getOffers} from '../../store/offers-process/selectors.ts';
+import {getCity} from '../../store/other-process/selectors.ts';
 
 
 type MainScreenProps = {
@@ -14,8 +16,8 @@ type MainScreenProps = {
 }
 
 function MainScreen({favorites}: MainScreenProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
-  const city = useAppSelector((state) => state.city);
+  const offers = useAppSelector(getOffers);
+  const city = useAppSelector(getCity);
 
   const curCityOffers = useMemo(
     () => offers.filter((offer) => offer.city.name === city),

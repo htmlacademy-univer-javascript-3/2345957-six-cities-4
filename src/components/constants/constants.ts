@@ -1,3 +1,9 @@
+export enum NameSpace {
+  Other = 'OTHER',
+  Offers = 'OFFERS',
+  User = 'USER',
+}
+
 export enum AppRoute {
   Main = '/',
   Login = '/login',

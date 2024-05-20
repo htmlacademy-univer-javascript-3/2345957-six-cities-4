@@ -2,7 +2,8 @@ import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer';
 import {getRating} from '../../utils.ts';
 import {useAppDispatch} from '../../hooks/index.ts';
-import {highlightMarker} from '../../store/action.ts';
+import {highlightMarker} from '../../store/offers-process/offers-process.ts';
+
 
 type CityCardProps = {
   cityCardInfo: Offer;

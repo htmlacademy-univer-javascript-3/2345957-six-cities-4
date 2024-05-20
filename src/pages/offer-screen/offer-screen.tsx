@@ -4,13 +4,14 @@ import Map from '../../components/map/map.tsx';
 import ListOfCityCards from '../../components/list-of-city-cards/list-of-city-cards.tsx';
 import {Offer, Points} from '../../types/offer.ts';
 import Hat from '../../components/hat/hat.tsx';
-import { useParams } from 'react-router-dom';
-import {useAppDispatch, useAppSelector } from '../../hooks/index.ts';
-import { useEffect } from 'react';
-import { fetchOfferDataAction } from '../../store/api-actions.ts';
+import {useParams} from 'react-router-dom';
+import {useAppDispatch, useAppSelector} from '../../hooks/index.ts';
+import {useEffect} from 'react';
+import {fetchOfferDataAction} from '../../store/api-actions.ts';
 import {getRating} from '../../utils.ts';
-import { AuthorizationStatus } from '../../components/constants/constants.ts';
+import {AuthorizationStatus} from '../../components/constants/constants.ts';
 import {selectCurrentOfferData} from '../../store/selectors.ts';
+import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
 
 type OfferScreenProps = {
   favorites: Offer[];
@@ -19,10 +20,10 @@ type OfferScreenProps = {
 const AVATAR_SIZE = '74';
 
 function OfferScreen({favorites}: OfferScreenProps): JSX.Element {
-  const { id } = useParams();
+  const {id} = useParams();
 
-  const user = useAppSelector((state) => state.authorizationStatus);
-  const { offerInfo, nearestOffers, reviews } = useAppSelector(selectCurrentOfferData);
+  const user = useAppSelector(getAuthorizationStatus);
+  const {offerInfo, nearestOffers, reviews} = useAppSelector(selectCurrentOfferData);
 
   const points: Points[] = nearestOffers.map((offer) => ({
     id: offer.id,
@@ -40,8 +41,8 @@ function OfferScreen({favorites}: OfferScreenProps): JSX.Element {
 
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(fetchOfferDataAction({ id: id ?? '' }));
-  }, [id]);
+    dispatch(fetchOfferDataAction({id: id ?? ''}));
+  }, [dispatch, id]);
   if (!offerInfo) {
     return <div className="container">Loading</div>;
   }
@@ -55,7 +56,7 @@ function OfferScreen({favorites}: OfferScreenProps): JSX.Element {
 
               {offerInfo.images.map((url) => (
                 <div className="offer__image-wrapper" key={url}>
-                  <img className="offer__image" src={url} alt="Photo studio" />
+                  <img className="offer__image" src={url} alt="Photo studio"/>
                 </div>
               ))}
 
@@ -80,7 +81,7 @@ function OfferScreen({favorites}: OfferScreenProps): JSX.Element {
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
                   <span
-                    style={{ width: `${getRating(offerInfo.rating)}` }}
+                    style={{width: `${getRating(offerInfo.rating)}`}}
                   />
                   <span className="visually-hidden">Rating</span>
                 </div>
@@ -145,7 +146,7 @@ function OfferScreen({favorites}: OfferScreenProps): JSX.Element {
                   Reviews &middot; <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <ListOfReviews reviews={reviews}/>
-                {user === AuthorizationStatus.Auth && <CommentSubmissionForm id={id!} />}
+                {user === AuthorizationStatus.Auth && <CommentSubmissionForm id={id!}/>}
               </section>
             </div>
           </div>

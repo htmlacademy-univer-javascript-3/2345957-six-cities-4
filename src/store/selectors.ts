@@ -1,11 +1,10 @@
-
 import { createSelector } from 'reselect';
 import {store} from './index.ts';
+import { NameSpace } from '../components/constants/constants.ts';
 
 type State = ReturnType<typeof store.getState>;
 
-// Селекторы для отдельных частей состояния
-const selectCurrentOffer = (state: State) => state.currentOffer;
+const selectCurrentOffer = (state: State) => state[NameSpace.Offers].currentOffer;
 
 const selectOfferInfo = createSelector(
   [selectCurrentOffer],
@@ -22,7 +21,6 @@ const selectReviews = createSelector(
   (currentOffer) => currentOffer.reviews
 );
 
-// Композитный селектор
 export const selectCurrentOfferData = createSelector(
   [selectOfferInfo, selectNearestOffers, selectReviews],
   (offerInfo, nearestOffers, reviews) => ({
