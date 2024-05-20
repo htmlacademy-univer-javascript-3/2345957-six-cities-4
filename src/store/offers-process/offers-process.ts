@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {Offer} from '../../types/offer';
 import {OffersState} from '../../types/state.ts';
-import {NameSpace} from '../../components/constants/constants.ts';
+import {NameSpace} from '../../constants/constants.ts';
 import {OfferData} from '../../types/offer-data.ts';
 import { Review } from '../../types/review.ts';
 

@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/index.ts';
-import {AuthorizationStatus} from '../../components/constants/constants.ts';
+import {AuthorizationStatus} from '../../constants/constants.ts';
 import { logoutAction } from '../../store/api-actions.ts';
 import {getAuthorizationStatus, getUserEmail} from '../../store/user-process/selectors.ts';
 

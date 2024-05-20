@@ -1,5 +1,5 @@
 import {State} from '../../types/state';
-import {NameSpace} from '../../components/constants/constants.ts';
+import {NameSpace} from '../../constants/constants.ts';
 
 export const getOffers = (state: State) => state[NameSpace.Offers].offers;
 export const getIsOffersDataLoading = (state: State) => state[NameSpace.Offers].isOffersDataLoading;

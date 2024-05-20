@@ -3,7 +3,7 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/use-map';
 import 'leaflet/dist/leaflet.css';
 import {City, Points} from '../../types/offer';
-import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../constants/constants';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../constants/constants.ts';
 import {useAppSelector} from '../../hooks';
 import {getSelectedMarker} from '../../store/offers-process/selectors.ts';
 

@@ -1,4 +1,4 @@
-import { NameSpace } from '../../components/constants/constants';
+import { NameSpace } from '../../constants/constants.ts';
 import {State} from '../../types/state';
 
 export const getCity = (state: State) => state[NameSpace.Other].city;

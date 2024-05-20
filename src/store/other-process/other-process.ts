@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { NameSpace } from '../../components/constants/constants.ts';
+import { NameSpace } from '../../constants/constants.ts';
 import {OtherState} from '../../types/state.ts';
 
 const initialState: OtherState = {

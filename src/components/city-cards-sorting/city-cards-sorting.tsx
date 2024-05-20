@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {SORT_TYPES} from '../constants/constants.ts';
+import {SORT_TYPES} from '../../constants/constants.ts';
 import {getSortType} from '../../store/other-process/selectors.ts';
 import { sortTypeSelect } from '../../store/other-process/other-process.ts';
 

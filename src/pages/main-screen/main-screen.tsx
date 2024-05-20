@@ -4,7 +4,7 @@ import Map from '../../components/map/map.tsx';
 import {useAppSelector} from '../../hooks/index.ts';
 import {useMemo} from 'react';
 import CitiesList from '../../components/list-of-cities/list-of-cities.tsx';
-import {Cities} from '../../components/constants/constants.ts';
+import {Cities} from '../../constants/constants.ts';
 import CityCardsSorting from '../../components/city-cards-sorting/city-cards-sorting.tsx';
 import Hat from '../../components/hat/hat.tsx';
 import {getOffers} from '../../store/offers-process/selectors.ts';

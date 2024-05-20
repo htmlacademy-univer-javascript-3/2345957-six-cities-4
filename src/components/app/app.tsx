@@ -5,7 +5,6 @@ import FavoritesScreen from '../../pages/favorites-screen/favorites-screen.tsx';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen.tsx';
 import OfferScreen from '../../pages/offer-screen/offer-screen.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
-import {AppRoute, AuthorizationStatus} from '../constants/constants.ts';
 import {Offer} from '../../types/offer.ts';
 import {useAppSelector} from '../../hooks/index.ts';
 import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
@@ -16,6 +15,7 @@ import {
   getOffers,
 } from '../../store/offers-process/selectors.ts';
 import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
+import {AppRoute, AuthorizationStatus } from '../../constants/constants.ts';
 
 
 function App(): JSX.Element {

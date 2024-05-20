@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AuthorizationStatus, NameSpace } from '../../components/constants/constants';
 import {UserState} from '../../types/state.ts';
+import { AuthorizationStatus, NameSpace } from '../../constants/constants.ts';
 
 const initialState: UserState = {
   authorizationStatus: AuthorizationStatus.Unknown,

@@ -9,7 +9,7 @@ import {useAppDispatch, useAppSelector} from '../../hooks/index.ts';
 import {useEffect} from 'react';
 import {fetchOfferDataAction} from '../../store/api-actions.ts';
 import {getRating} from '../../utils.ts';
-import {AuthorizationStatus} from '../../components/constants/constants.ts';
+import {AuthorizationStatus} from '../../constants/constants.ts';
 import {selectCurrentOfferData} from '../../store/selectors.ts';
 import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
 

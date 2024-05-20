@@ -6,7 +6,7 @@ import {
   redirectToRoute,
 } from './action.ts';
 import {store} from './index.ts';
-import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../components/constants/constants.ts';
+import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../constants/constants.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {UserData} from '../types/user-data.ts';
 import {AuthData} from '../types/auth-data.ts';
