@@ -3,8 +3,9 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/use-map';
 import 'leaflet/dist/leaflet.css';
 import {City, Points} from '../../types/offer';
-import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../constants/constants';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../constants/constants.ts';
 import {useAppSelector} from '../../hooks';
+import {getSelectedMarker} from '../../store/offers-process/selectors.ts';
 
 type MapProps = {
   city: City;
@@ -30,12 +31,12 @@ function Map({city, points, specialCaseId}: MapProps): JSX.Element {
   const map = useMap(mapRef, city);
 
   const selectedMarker: null | { id: string } = useAppSelector(
-    (state) => state.selectedMarker
+    getSelectedMarker
   );
 
   useEffect(() => {
     if (map && city) {
-      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
+      map.flyTo([city.location.latitude, city.location.longitude], city.location.zoom);
     }
   }, [city, map]);
 
@@ -66,12 +67,6 @@ function Map({city, points, specialCaseId}: MapProps): JSX.Element {
       };
     }
   }, [map, points, selectedMarker, specialCaseId]);
-
-  useEffect(() => {
-    if (map && city) {
-      map.setView([city.location.latitude, city.location.longitude], city.location.zoom);
-    }
-  }, [map, city]);
 
   return <div style={{height: '100%'}} ref={mapRef}></div>;
 }

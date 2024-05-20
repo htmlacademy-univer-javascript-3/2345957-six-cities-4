@@ -2,11 +2,13 @@ import ListOfCityCards from '../../components/list-of-city-cards/list-of-city-ca
 import {Offer} from '../../types/offer.ts';
 import Map from '../../components/map/map.tsx';
 import {useAppSelector} from '../../hooks/index.ts';
-import {useEffect, useState} from 'react';
+import {useMemo} from 'react';
 import CitiesList from '../../components/list-of-cities/list-of-cities.tsx';
-import {Cities} from '../../components/constants/constants.ts';
+import {Cities} from '../../constants/constants.ts';
 import CityCardsSorting from '../../components/city-cards-sorting/city-cards-sorting.tsx';
 import Hat from '../../components/hat/hat.tsx';
+import {getOffers} from '../../store/offers-process/selectors.ts';
+import {getCity} from '../../store/other-process/selectors.ts';
 
 
 type MainScreenProps = {
@@ -14,15 +16,14 @@ type MainScreenProps = {
 }
 
 function MainScreen({favorites}: MainScreenProps): JSX.Element {
-  const offers = useAppSelector((state) => state.offers);
+  const offers = useAppSelector(getOffers);
+  const city = useAppSelector(getCity);
 
-  const [curCityOffers, setCurCityOffers] = useState<Offer[]>(offers);
+  const curCityOffers = useMemo(
+    () => offers.filter((offer) => offer.city.name === city),
+    [offers, city]
+  );
 
-  const city = useAppSelector((state) => state.city);
-  useEffect(() => {
-    const filteredOffers = offers.filter((offer) => offer.city.name === city);
-    setCurCityOffers(filteredOffers);
-  }, [city, offers]);
   return (
     <div className="page page--gray page--main">
       <Hat favorites={favorites}/>
