@@ -25,6 +25,7 @@ import {
 import {CheckButton} from '../types/check-button.ts';
 import {setError} from './other-process/other-process.ts';
 import {dropEmail, saveEmail} from '../services/email.ts';
+import {dropProfilePicture, saveProfilePicture} from '../services/profile-picture.ts';
 
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
@@ -116,6 +117,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dropEmail();
+    dropProfilePicture();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
@@ -137,43 +139,41 @@ export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
 }>(
   'fetchFavorites',
   async (_arg, {dispatch, extra: api}) => {
-    try {
-      const {data} = await api.get<Offer[]>(`${APIRoute.Favorite}`);
-      dispatch(loadFavorites(data));
-    } catch (error) {
-      console.log(error);
-    }
-  },
+    const {data} = await api.get<Offer[]>(`${APIRoute.Favorite}`);
+    dispatch(loadFavorites(data));
+  }
 );
 
 export const changeFavouriteStatusAction = createAsyncThunk<void, CheckButton, {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }>(
-    'changeFavoriteStatus',
-    async ({status, offerId}, {extra: api, dispatch}) => {
-      const {data} = await api.post<Offer>(`${APIRoute.Favorite}/${offerId}/${status}`);
-      dispatch(updateOffers(data));
-      dispatch(fetchFavoritesAction());
-    },
-  );
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'changeFavoriteStatus',
+  async ({status, offerId}, {extra: api, dispatch}) => {
+    const {data} = await api.post<Offer>(`${APIRoute.Favorite}/${offerId}/${status}`);
+    dispatch(updateOffers(data));
+    dispatch(fetchFavoritesAction());
+  },
+);
 
 
 export const loginAction = createAsyncThunk<void, AuthData, {
-    dispatch: AppDispatch;
-    state: State;
-    extra: AxiosInstance;
-  }>(
-    'user/login',
-    async ({email: email, password}, {dispatch, extra: api}) => {
-      const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-      saveToken(token);
-      saveEmail(email);
-      dispatch(fetchOffersAction());
-      dispatch(fetchFavoritesAction());
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      dispatch(redirectToRoute(AppRoute.Main));
-    },
-  );
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'user/login',
+  async ({email: email, password}, {dispatch, extra: api}) => {
+    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+    saveToken(token);
+    saveEmail(email);
+    dispatch(fetchOffersAction());
+    dispatch(fetchFavoritesAction());
+    dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    dispatch(redirectToRoute(AppRoute.Main));
+    const {data } = await api.get<UserData>(APIRoute.Login);
+    saveProfilePicture(data.avatarUrl);
+  },
+);
 

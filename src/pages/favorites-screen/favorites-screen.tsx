@@ -1,7 +1,8 @@
-import CityCard from '../../components/cards/city-card';
 import {Offer} from '../../types/offer';
 import Hat from '../../components/hat/hat.tsx';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
+import ListFavorites from '../../components/list-of-favorites/list-of-favorites.tsx';
+import EmptyFavorites from '../../components/empty-favorites/empty-favorites.tsx';
 
 type FavoritesScreenProps = {
   favorites: Offer[];
@@ -11,42 +12,16 @@ const LOGO_WIDTH = '64';
 const LOGO_HEIGHT = '33';
 
 function FavoritesScreen({favorites}: FavoritesScreenProps): JSX.Element {
-  const favoritesMap = favorites.reduce(
-    (acc: Record<string, Offer[]>, place: Offer) => {
-      const city = place.city.name;
-      acc[city] = [...(acc[city] ?? []), place];
-      return acc;
-    },
-    {}
-  );
   return (
     <div className="page">
       <Hat favorites={favorites}/>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          <section className="favorites">
-            <h1 className="favorites__title">Saved listing</h1>
-            <ul className="favorites__list">
-
-              {Object.keys(favoritesMap).map((city) => (
-                <li className="favorites__locations-items" key={city}>
-                  <div className="favorites__locations locations locations--current">
-                    <div className="locations__item">
-                      <a className="locations__item-link" href="#">
-                        <span>{city}</span>
-                      </a>
-                    </div>
-                  </div>
-                  <div className="favorites__places">
-                    {favoritesMap[city].map((place) => (
-                      <CityCard key={place.id} cityCardInfo={place} cityCardType={'typical'}/>
-                    ))}
-                  </div>
-                </li>
-              ))}
-
-            </ul>
-          </section>
+          {favorites.length > 0 ? (
+            <ListFavorites favorites={favorites}/>
+          ) : (
+            <EmptyFavorites/>
+          )}
         </div>
       </main>
       <footer className="footer container">

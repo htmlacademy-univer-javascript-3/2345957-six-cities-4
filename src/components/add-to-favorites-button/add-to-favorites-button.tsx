@@ -1,9 +1,9 @@
-import {useNavigate} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getAuthorizationStatus} from '../../store/user-process/selectors';
-import {APIRoute, AuthorizationStatus, FavouriteStatus} from '../../constants/constants';
-import {changeFavouriteStatusAction} from '../../store/api-actions';
-import {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { APIRoute, AuthorizationStatus, FavouriteStatus } from '../../constants/constants';
+import { changeFavouriteStatusAction } from '../../store/api-actions';
+import { useEffect, useState } from 'react';
 
 type AddToFavouritesButtonProps = {
   isFavorite: boolean;
@@ -36,10 +36,10 @@ function AddToFavouritesButton(props: AddToFavouritesButtonProps): JSX.Element {
 
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  // Update isFavorite state when initialFavoriteStatus prop changes
+
   useEffect(() => {
     setIsFavorite(initialFavoriteStatus);
-  }, [initialFavoriteStatus, id]); // Include id in dependency array to handle id change
+  }, [initialFavoriteStatus, id]);
 
   const handleBookmarkClick = async () => {
     if (authorizationStatus !== AuthorizationStatus.Auth) {
@@ -58,11 +58,13 @@ function AddToFavouritesButton(props: AddToFavouritesButtonProps): JSX.Element {
       ).unwrap();
 
       setIsFavorite(!isFavorite);
-    } catch (error) {
-      console.log(error);
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const onBookmarkClick = () => {
+    handleBookmarkClick();
   };
 
   return (
@@ -70,7 +72,7 @@ function AddToFavouritesButton(props: AddToFavouritesButtonProps): JSX.Element {
       className={`bookmark-button button ${buttonClass} ${isFavorite ? activeClass : ''}`}
       type="button"
       disabled={isSubmitting}
-      onClick={handleBookmarkClick}
+      onClick={onBookmarkClick}
     >
       <svg
         className={`bookmark-icon ${iconClass}`}

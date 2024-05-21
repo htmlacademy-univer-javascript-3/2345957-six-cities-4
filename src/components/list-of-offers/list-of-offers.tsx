@@ -5,7 +5,7 @@ import { Offer } from '../../types/offer.ts';
 
 type ListOffersProps = {
   city: string;
-  offers: Offer[]
+  offers: Offer[];
 }
 
 
