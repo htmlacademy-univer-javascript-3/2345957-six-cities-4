@@ -33,7 +33,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'fetchOffers',
+  'offers/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersDataLoadingStatus(true));
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
@@ -53,7 +53,7 @@ export const fetchOfferDataAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('fetchOfferData', async ({id}, {dispatch, extra: api}) => {
+>('offers/fetchOfferData', async ({id}, {dispatch, extra: api}) => {
   const {data: offerInfo} = await api.get<ExtendedOffer>(
     `${APIRoute.Offers}/${id}`
   );
@@ -78,7 +78,7 @@ export const sendCommentAction = createAsyncThunk<
     state: State;
     extra: AxiosInstance;
   }
->('sendComment', async ({comment, id}, {dispatch, extra: api}) => {
+>('offers/sendComment', async ({comment, id}, {dispatch, extra: api}) => {
   const {data: review} = await api.post<Review>(
     `${APIRoute.Comments}/${id}`,
     {
@@ -112,7 +112,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'six-cities/login',
+  'user/logout',
   async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
     dropToken();
@@ -123,7 +123,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
 );
 
 export const clearErrorAction = createAsyncThunk(
-  'clearError',
+  'other/clearError',
   () => {
     setTimeout(
       () => store.dispatch(setError(null)),
@@ -137,7 +137,7 @@ export const fetchFavoritesAction = createAsyncThunk<void, undefined, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'fetchFavorites',
+  'offers/fetchFavorites',
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Offer[]>(`${APIRoute.Favorite}`);
     dispatch(loadFavorites(data));
@@ -149,7 +149,7 @@ export const changeFavouriteStatusAction = createAsyncThunk<void, CheckButton, {
   state: State;
   extra: AxiosInstance;
 }>(
-  'changeFavoriteStatus',
+  'offers/changeFavoriteStatus',
   async ({status, offerId}, {extra: api, dispatch}) => {
     const {data} = await api.post<Offer>(`${APIRoute.Favorite}/${offerId}/${status}`);
     dispatch(updateOffers(data));

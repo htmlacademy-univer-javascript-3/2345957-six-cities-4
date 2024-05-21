@@ -3,7 +3,7 @@ import {useAppDispatch} from '../../hooks';
 import {Link} from 'react-router-dom';
 import {loginAction} from '../../store/api-actions';
 import {cityChange} from '../../store/other-process/other-process.ts';
-import {citiesForRandom} from '../../constants/constants.ts';
+import {citiesForRandomString} from '../../constants/constants.ts';
 
 const LOGO_WIDTH = '81';
 const LOGO_HEIGHT = '41';
@@ -27,7 +27,7 @@ function LoginScreen(): JSX.Element {
     }
   };
 
-  const getRandomCity = () => citiesForRandom[Math.floor(Math.random() * citiesForRandom.length)];
+  const getRandomCity = () => citiesForRandomString[Math.floor(Math.random() * citiesForRandomString.length)];
 
   const newCityName = getRandomCity();
   const handleCityClick = () => {
