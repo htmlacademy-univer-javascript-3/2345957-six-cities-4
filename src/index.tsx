@@ -10,6 +10,8 @@ store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
 store.dispatch(fetchFavoritesAction());
 
+//проверка
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
