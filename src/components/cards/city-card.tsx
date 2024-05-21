@@ -3,6 +3,7 @@ import {Offer} from '../../types/offer';
 import {getRating} from '../../utils.ts';
 import {useAppDispatch} from '../../hooks/index.ts';
 import {highlightMarker} from '../../store/offers-process/offers-process.ts';
+import AddToFavoritesButton from '../add-to-favorites-button/add-to-favorites-button.tsx';
 
 
 type CityCardProps = {
@@ -13,8 +14,8 @@ type CityCardProps = {
 const CITY_CARD_WIDTH = '260';
 const CITY_CARD_HEIGHT = '200';
 
-const BOOKMARK_ICON_WIDTH = '18';
-const BOOKMARK_ICON_HEIGHT = '19';
+const BOOKMARK_ICON_WIDTH = 18;
+const BOOKMARK_ICON_HEIGHT = 19;
 
 function CityCard({cityCardInfo, cityCardType}: CityCardProps): JSX.Element {
   const {
@@ -22,8 +23,6 @@ function CityCard({cityCardInfo, cityCardType}: CityCardProps): JSX.Element {
     title,
     type,
     price,
-    //city,
-    //location,
     isFavorite,
     isPremium,
     rating,
@@ -55,15 +54,16 @@ function CityCard({cityCardInfo, cityCardType}: CityCardProps): JSX.Element {
                 <b className="place-card__price-value">&euro;{price}</b>
                 <span className="place-card__price-text">&#47;&nbsp;night</span>
               </div>
-              <button
-                className="place-card__bookmark-button place-card__bookmark-button--active button"
-                type="button"
-              >
-                <svg className="place-card__bookmark-icon" width={BOOKMARK_ICON_WIDTH} height={BOOKMARK_ICON_HEIGHT}>
-                  {isFavorite && <use xlinkHref="#icon-bookmark"></use>}
-                </svg>
-                <span className="visually-hidden">In bookmarks</span>
-              </button>
+              <AddToFavoritesButton
+                id={id}
+                isFavorite={isFavorite}
+                iconWidth={BOOKMARK_ICON_WIDTH}
+                iconHeight={BOOKMARK_ICON_HEIGHT}
+                buttonClass="place-card__bookmark-button"
+                activeClass="place-card__bookmark-button--active"
+                iconClass="place-card__bookmark-icon"
+                buttonText="In bookmarks"
+              />
             </div>
             <div className="place-card__rating rating">
               <div className="place-card__stars rating__stars">

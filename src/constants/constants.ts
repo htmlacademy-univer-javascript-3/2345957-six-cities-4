@@ -8,7 +8,7 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Favorites = '/favorites',
-  Offer = '/offer/:id'
+  Offer = '/offer/:id',
 }
 
 export enum AuthorizationStatus {
@@ -22,6 +22,12 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Comments = '/comments',
+  Favorite = '/favorite',
+}
+
+export enum FavouriteStatus {
+  Add = 1,
+  Remove = 0,
 }
 
 export const URL_MARKER_DEFAULT =

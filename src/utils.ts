@@ -21,3 +21,11 @@ export const getSorting = (
       throw new Error('Non-existent sort type');
   }
 };
+
+export const updateOffer = (offers: Offer[], updatedOffer: Offer) => {
+  const offerIndex = offers.findIndex((el) => el.id === updatedOffer.id);
+  if (offerIndex !== -1) {
+    offers[offerIndex] = updatedOffer;
+  }
+};
+

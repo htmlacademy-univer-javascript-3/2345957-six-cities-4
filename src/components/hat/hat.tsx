@@ -2,8 +2,9 @@ import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offer.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks/index.ts';
 import {AuthorizationStatus} from '../../constants/constants.ts';
-import { logoutAction } from '../../store/api-actions.ts';
-import {getAuthorizationStatus, getUserEmail} from '../../store/user-process/selectors.ts';
+import {logoutAction} from '../../store/api-actions.ts';
+import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
+import {getEmail} from '../../services/email.ts';
 
 
 type HatProps = {
@@ -16,7 +17,7 @@ const LOGO_HEIGHT = '41';
 function Hat({favorites}: HatProps): JSX.Element {
   const dispatch = useAppDispatch();
   const user = useAppSelector(getAuthorizationStatus);
-  const userEmail = useAppSelector(getUserEmail);
+  const userEmail = getEmail();
   const handleSignOut = () => {
     dispatch(logoutAction());
   };
@@ -27,7 +28,9 @@ function Hat({favorites}: HatProps): JSX.Element {
         <div className="header__wrapper">
           <div className="header__left">
             <Link to="/" className="header__logo-link header__logo-link--active">
-              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={LOGO_WIDTH} height={LOGO_HEIGHT}/>
+              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width={LOGO_WIDTH}
+                height={LOGO_HEIGHT}
+              />
             </Link>
           </div>
           <nav className="header__nav">
