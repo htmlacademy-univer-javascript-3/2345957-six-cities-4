@@ -15,8 +15,8 @@ import {
   getIsOffersDataLoading,
 } from '../../store/offers-process/selectors.ts';
 import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
-import {AppRoute, AuthorizationStatus } from '../../constants/constants.ts';
-import { getCity } from '../../store/other-process/selectors.ts';
+import {AppRoute, AuthorizationStatus} from '../../constants/constants.ts';
+import {getCity} from '../../store/other-process/selectors.ts';
 
 
 function App(): JSX.Element {

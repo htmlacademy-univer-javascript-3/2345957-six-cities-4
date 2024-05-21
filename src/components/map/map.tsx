@@ -50,7 +50,7 @@ function Map({city, points, specialCaseId}: MapProps): JSX.Element {
           lng: point.location.longitude
         });
 
-        if (specialCaseId === undefined){
+        if (specialCaseId === undefined) {
           marker
             .setIcon(selectedMarker !== null && point.id === selectedMarker.id ? currentCustomIcon : defaultCustomIcon)
             .addTo(markerLayer);

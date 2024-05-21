@@ -1,6 +1,6 @@
-import { createSelector } from 'reselect';
+import {createSelector} from 'reselect';
 import {store} from './index.ts';
-import { NameSpace } from '../constants/constants.ts';
+import {NameSpace} from '../constants/constants.ts';
 
 type State = ReturnType<typeof store.getState>;
 

@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../constants/constants';
+import {AuthorizationStatus} from '../constants/constants';
 import {store} from '../store';
 import {ExtendedOffer, Offer} from './offer';
 import {Review} from './review';

@@ -1,6 +1,6 @@
 import CityCardsSorting from '../city-cards-sorting/city-cards-sorting.tsx';
 import ListOfCityCards from '../list-of-city-cards/list-of-city-cards.tsx';
-import { Offer } from '../../types/offer.ts';
+import {Offer} from '../../types/offer.ts';
 
 
 type ListOffersProps = {

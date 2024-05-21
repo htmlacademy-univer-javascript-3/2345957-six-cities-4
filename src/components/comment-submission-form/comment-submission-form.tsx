@@ -1,5 +1,5 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch } from '../../hooks';
+import {ChangeEvent, FormEvent, useState} from 'react';
+import {useAppDispatch} from '../../hooks';
 import {sendCommentAction} from '../../store/api-actions.ts';
 
 type CommentFromProps = {
@@ -15,7 +15,7 @@ const STAR_WIDTH = '37';
 
 const STAR_HEIGHT = '33';
 
-function CommentSubmissionForm({ id }: CommentFromProps) {
+function CommentSubmissionForm({id}: CommentFromProps) {
   const [formState, setFormState] = useState<Rating>({
     rating: '',
     comment: '',
@@ -60,7 +60,7 @@ function CommentSubmissionForm({ id }: CommentFromProps) {
   return (
     <form className="reviews__form form" onSubmit={handleFromSubmit}>
       <label className="reviews__label form__label" htmlFor="review">
-          Your review
+        Your review
       </label>
       <div className="reviews__rating-form form__rating">
         <input
@@ -168,19 +168,20 @@ function CommentSubmissionForm({ id }: CommentFromProps) {
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-            To submit review please make sure to set{' '}
+          To submit review please make sure to set{' '}
           <span className="reviews__star">rating</span> and describe your stay
-            with at least <b className="reviews__text-amount">50 characters</b>.
+          with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
         <button
           className="reviews__submit form__submit button"
           type="submit"
           disabled={!isValid()}
         >
-            Submit
+          Submit
         </button>
       </div>
     </form>
   );
 }
+
 export default CommentSubmissionForm;
