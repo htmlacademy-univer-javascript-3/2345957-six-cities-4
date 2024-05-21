@@ -6,18 +6,17 @@ import CitiesList from '../../components/list-of-cities/list-of-cities.tsx';
 import {Cities} from '../../constants/constants.ts';
 import Hat from '../../components/hat/hat.tsx';
 import {getOffers} from '../../store/offers-process/selectors.ts';
-import {getCity} from '../../store/other-process/selectors.ts';
 import ListOffers from '../../components/list-of-offers/list-of-offers.tsx';
 import EmptyOffers from '../../components/empty-offers/empty-offers.tsx';
 
 
 type MainScreenProps = {
   favorites: Offer[];
+  city: string;
 }
 
-function MainScreen({favorites}: MainScreenProps): JSX.Element {
+function MainScreen({favorites, city}: MainScreenProps): JSX.Element {
   const offers = useAppSelector(getOffers);
-  const city = useAppSelector(getCity);
 
   const curCityOffers = useMemo(
     () => offers.filter((offer) => offer.city.name === city),

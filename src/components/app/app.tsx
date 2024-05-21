@@ -16,9 +16,11 @@ import {
 } from '../../store/offers-process/selectors.ts';
 import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
 import {AppRoute, AuthorizationStatus } from '../../constants/constants.ts';
+import { getCity } from '../../store/other-process/selectors.ts';
 
 
 function App(): JSX.Element {
+  const city = useAppSelector(getCity);
   const favorites: Offer[] = useAppSelector(getFavorites);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
@@ -33,7 +35,7 @@ function App(): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen favorites={favorites}/>}
+          element={<MainScreen favorites={favorites} city={city}/>}
         />
         <Route
           path={AppRoute.Login}

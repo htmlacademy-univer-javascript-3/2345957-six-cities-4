@@ -1,7 +1,9 @@
-import { FormEvent, useRef } from 'react';
-import { useAppDispatch } from '../../hooks';
-import { Link } from 'react-router-dom';
-import { loginAction } from '../../store/api-actions';
+import {FormEvent, useRef} from 'react';
+import {useAppDispatch} from '../../hooks';
+import {Link} from 'react-router-dom';
+import {loginAction} from '../../store/api-actions';
+import {cityChange} from '../../store/other-process/other-process.ts';
+import {citiesForRandom} from '../../constants/constants.ts';
 
 const LOGO_WIDTH = '81';
 const LOGO_HEIGHT = '41';
@@ -23,6 +25,13 @@ function LoginScreen(): JSX.Element {
         })
       );
     }
+  };
+
+  const getRandomCity = () => citiesForRandom[Math.floor(Math.random() * citiesForRandom.length)];
+
+  const newCityName = getRandomCity();
+  const handleCityClick = () => {
+    dispatch(cityChange(newCityName));
   };
   return (
     <div className="page page--gray page--login">
@@ -75,8 +84,8 @@ function LoginScreen(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link to="/" className="locations__item-link">
-                <span>Amsterdam</span>
+              <Link to="/" className="locations__item-link" onClick={handleCityClick}>
+                <span>{newCityName}</span>
               </Link>
             </div>
           </section>

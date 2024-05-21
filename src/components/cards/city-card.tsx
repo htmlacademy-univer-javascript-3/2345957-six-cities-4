@@ -35,7 +35,6 @@ function CityCard({cityCardInfo, cityCardType}: CityCardProps): JSX.Element {
     >
       <article
         className={`${cityCardType === 'typical' ? 'cities__card place-card' : 'near-places__card place-card'}`}
-        onClick={() => window.scrollTo(0, 0)}
       >
         {isPremium && (
           <div className="place-card__mark">
@@ -71,7 +70,7 @@ function CityCard({cityCardInfo, cityCardType}: CityCardProps): JSX.Element {
             </div>
           </div>
           <h2 className="place-card__name">
-            <Link to={`/offer/${id}`} state={cityCardInfo}>
+            <Link to={`/offer/${id}`} state={cityCardInfo} onClick={() => window.scrollTo(0, 0)}>
               {title}
             </Link>
           </h2>

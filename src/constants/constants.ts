@@ -70,5 +70,7 @@ export const SORT_TYPES = {
   3: 'Top rated first',
 };
 
+export const citiesForRandom = ['Amsterdam', 'Paris', 'Cologne', 'Brussels', 'Hamburg', 'Dusseldorf'];
+
 export const TIMEOUT_SHOW_ERROR = 2000;
 
