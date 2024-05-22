@@ -18,7 +18,7 @@ function ReviewsOfList({reviews}: ReviewsOfListProps): JSX.Element {
         })
         .slice(0, 10)
         .map((review) => (
-          <OneReview key={review.id} review={review} />
+          <OneReview key={review.id} review={review}/>
         ))}
     </ul>
   );

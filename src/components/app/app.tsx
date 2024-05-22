@@ -11,15 +11,17 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen.tsx';
 import browserHistory from '../../browser-history.ts';
 import HistoryRouter from '../history-router/history-router.tsx';
 import {
+  getFavorites,
   getIsOffersDataLoading,
-  getOffers,
 } from '../../store/offers-process/selectors.ts';
 import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
-import {AppRoute, AuthorizationStatus } from '../../constants/constants.ts';
+import {AppRoute, AuthorizationStatus} from '../../constants/constants.ts';
+import {getCity} from '../../store/other-process/selectors.ts';
 
 
 function App(): JSX.Element {
-  const offers: Offer[] = useAppSelector(getOffers);
+  const city = useAppSelector(getCity);
+  const favorites: Offer[] = useAppSelector(getFavorites);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isOffersDataLoading = useAppSelector(getIsOffersDataLoading);
 
@@ -28,14 +30,12 @@ function App(): JSX.Element {
       <LoadingScreen/>
     );
   }
-
-  const favorites = offers.filter((o) => o.isFavorite);
   return (
     <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen favorites={favorites}/>}
+          element={<MainScreen favorites={favorites} city={city}/>}
         />
         <Route
           path={AppRoute.Login}
