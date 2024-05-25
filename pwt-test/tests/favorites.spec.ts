@@ -72,5 +72,26 @@ test('Избранное (неавторизован/авторизован)', a
     }
     await page.waitForSelector(`text=${changedFavCounter}`)
     
+    if (changedFavCounter === 0) {
+      await Promise.all([
+        page.waitForResponse(
+          (resp) =>
+            resp.url().includes('/favorite') &&
+            resp.status() ===  201
+        ),
+        page.locator('.bookmark-button').first().click(),
+      ]);
+    }
+
+    await page.goto('http://localhost:5173/favorites');
+
+    await page.waitForSelector(`.favorites__list`);
+
+    const favCardCity = await page.locator('.locations__item-link').first().textContent();
+
+    expect(favCardCity).toBe('Paris');
+    const favoritesCardsNumber = ( await page.locator('.locations__item-link').all()).length;
+    const lastFavCounter = await getFavoritesNumber();
+    expect(favoritesCardsNumber).toBe(lastFavCounter);
   });
 
