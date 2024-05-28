@@ -15,7 +15,7 @@ test('Избранное (неавторизован/авторизован)', a
       parseInt(
         (await page.locator('.header__favorite-count').textContent()) || '0'
       );
-    
+
     await page.goto('http://localhost:5173');
     await page.waitForSelector('.cities__card');
 
@@ -24,74 +24,65 @@ test('Избранное (неавторизован/авторизован)', a
 
     await page.goto('http://localhost:5173');
     await page.waitForSelector('.cities__card');
-    
+
     await page.locator('.place-card__name').first().click();
     await page.waitForSelector('.offer__inside-list');
-    
+
     await page.locator('.bookmark-button').first().click();
     await page.waitForURL('http://localhost:5173/login');
 
     await page.goto('http://localhost:5173/favorites');
     await page.waitForURL('http://localhost:5173/login');
-    
+
 
     await page.goto('http://localhost:5173/login');
 
-    await page.fill('input[name="email"]', 'MariaTest@mail.com');
-    await page.fill('input[name="password"]', 'valid2024');
+    await page.fill('input[name="email"]', 'testMaria@mail.com');
+    await page.fill('input[name="password"]', 'valid1');
 
     await Promise.all([
       page.waitForURL('http://localhost:5173'),
-      page.click('button[type="submit"]'), 
+      page.click('button[type="submit"]'),
     ]);
 
     await page.waitForSelector('.cities__card');
-
-    const initialFavCounter = await getFavoritesNumber();
-
-    const wasFavorite = await isFavorite();
 
     await Promise.all([
       page.waitForResponse(
         (resp) =>
           resp.url().includes('/favorite') &&
-          resp.status() === (wasFavorite ? 200 : 201)
+          resp.status() ===  201
       ),
       page.locator('.bookmark-button').first().click(),
     ]);
-    
-    const isFavoriteAfterAction = await isFavorite();
-    let changedFavCounter;
-    
-    if (wasFavorite) {
-      expect(isFavoriteAfterAction).toBeFalsy();
-      changedFavCounter = initialFavCounter - 1;
-    } else {
-      expect(isFavoriteAfterAction).toBeTruthy();
-      changedFavCounter = initialFavCounter + 1;
-    }
-    await page.waitForSelector(`text=${changedFavCounter}`)
-    
-    if (changedFavCounter === 0) {
-      await Promise.all([
-        page.waitForResponse(
-          (resp) =>
-            resp.url().includes('/favorite') &&
-            resp.status() ===  201
-        ),
-        page.locator('.bookmark-button').first().click(),
-      ]);
-    }
 
-    await page.goto('http://localhost:5173/favorites');
+    const isFavoriteAfterAction = await isFavorite();
+    expect(isFavoriteAfterAction).toBeTruthy();
+    
+    await page.waitForSelector("text='1'");
+
+    await Promise.all([
+      page.waitForURL('http://localhost:5173/favorites'),
+      page.getByRole('link', { name: 'testMaria@mail.com' }).click(),
+    ])
 
     await page.waitForSelector(`.favorites__list`);
 
     const favCardCity = await page.locator('.locations__item-link').first().textContent();
-
     expect(favCardCity).toBe('Paris');
-    const favoritesCardsNumber = ( await page.locator('.locations__item-link').all()).length;
+    
+    const favoritesCardsNumber = await page.locator('.locations__item-link').count();
     const lastFavCounter = await getFavoritesNumber();
     expect(favoritesCardsNumber).toBe(lastFavCounter);
-  });
 
+    await Promise.all([
+      page.waitForResponse(
+        (resp) =>
+          resp.url().includes('/favorite') &&
+          resp.status() ===  200
+      ),
+      page.locator('.bookmark-button').first().click(),
+    ]);
+
+    await page.waitForSelector("text='Nothing yet saved.'");
+  });
