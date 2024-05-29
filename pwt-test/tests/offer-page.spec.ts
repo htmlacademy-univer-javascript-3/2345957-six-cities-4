@@ -14,7 +14,7 @@ test('Переход на страницу карточки', async ({ page }) =
     .first()
     .textContent();
 
-  await page.locator('.place-card__name').first().click();
+  await page.locator('.place-card__name').locator('a').first().click();
 
   await page.waitForSelector('.offer__inside-list');
 
