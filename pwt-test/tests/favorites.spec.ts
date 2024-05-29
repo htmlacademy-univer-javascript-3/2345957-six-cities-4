@@ -25,7 +25,7 @@ test('Избранное (неавторизован/авторизован)', a
     await page.goto('http://localhost:5173');
     await page.waitForSelector('.cities__card');
 
-    await page.locator('.place-card__name').first().click();
+    await page.locator('.place-card__name').locator('a').first().click();
     await page.waitForSelector('.offer__inside-list');
 
     await page.locator('.bookmark-button').first().click();
