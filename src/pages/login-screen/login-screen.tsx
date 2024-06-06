@@ -3,7 +3,7 @@ import {useAppDispatch} from '../../hooks';
 import {Link} from 'react-router-dom';
 import {loginAction} from '../../store/api-actions';
 import {cityChange} from '../../store/other-process/other-process.ts';
-import {citiesForRandomString} from '../../constants/constants.ts';
+import {AppRoute, citiesForRandomString} from '../../constants/constants.ts';
 
 const LOGO_WIDTH = '81';
 const LOGO_HEIGHT = '41';
@@ -39,7 +39,7 @@ function LoginScreen(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="#">
+              <Link to={AppRoute.Main} className="header__logo-link">
                 <img
                   className="header__logo"
                   src="img/logo.svg"
@@ -47,7 +47,7 @@ function LoginScreen(): JSX.Element {
                   width={LOGO_WIDTH}
                   height={LOGO_HEIGHT}
                 />
-              </a>
+              </Link>
             </div>
           </div>
         </div>
